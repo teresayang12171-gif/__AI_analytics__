@@ -1,0 +1,6 @@
+{
+  "name": "AI 數據分析與洞察工具",
+  "description": "這是一款專為數據分析與商業洞察設計的 AI 工具。支援 CSV 上傳與解析、表格視覺化預覽，並採用 Google Gemini 進行深度、智慧的數據解讀與商業洞察產出。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
