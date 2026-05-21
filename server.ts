@@ -80,14 +80,20 @@ app.post("/api/analyze", async (req, res) => {
 
 // Vite 與靜態檔案中介軟體設定
 async function setupVite() {
-  if (process.env.NODE_ENV !== "production") {
+  const isProduction = process.env.NODE_ENV === "production" || __dirname.endsWith("dist") || __dirname.endsWith("dist/");
+
+  if (!isProduction) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), "dist");
+    // 依據執行路徑決定靜態檔案目錄 (若已被打包至 dist/ 則 __dirname 即為 dist)
+    const distPath = __dirname.endsWith("dist") || __dirname.endsWith("dist/")
+      ? __dirname
+      : path.join(__dirname, "dist");
+
     app.use(express.static(distPath));
     app.get("*", (req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
