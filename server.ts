@@ -8,7 +8,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json({ limit: "50mb" })); // 防止大型 CSV 造成請求過大錯誤
-const PORT = 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
 // 取得 Gemini 用戶端
 const getGeminiClient = () => {
